@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:visionia_app/MainScreens/login/welcomeScreen.dart';
+import 'package:visionia_app/MainScreens/pagehome/homeScreen.dart';
 import 'package:visionia_app/Utils/AssetsImages.dart';
 import 'package:visionia_app/Utils/ConstantsApp.dart';
 import 'package:visionia_app/Utils/TextApp.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xff2c2b50),
         primaryColorDark: const Color(0xff050028),
@@ -43,7 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return SplashScreen(
       seconds: ConstantsAPP.TIME_SPLASH_SCREEN, //Genera una carga de 5 segundos
       navigateAfterSeconds:
-          const WelcomeScreen(), //Me envia a la pantalla indicada
+          //const WelcomeScreen(), //Me envia a la pantalla indicada
+          const HomeScreen(),
       //image: AssetsImages.ImageLogo(), //Pone una imagen en la pantalla de carga
       backgroundColor:
           Colors.white, //Asigna un color de fondo a la pantalla de carga
