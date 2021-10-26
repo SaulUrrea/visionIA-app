@@ -5,15 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:visionia_app/Utils/AssetsImages.dart';
 import 'package:visionia_app/Widgets/Bar/BarWidgets.dart';
 import 'package:visionia_app/Widgets/GridDashboard/griddashboard.dart';
+import 'package:visionia_app/Widgets/GridHistory/gridhistory.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HistoryScreen extends StatefulWidget {
+  const HistoryScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HistoryScreenState createState() => _HistoryScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 4,
                         ),
                         Text(
-                          "Inicio",
+                          "Historial",
                           style: GoogleFonts.openSans(
                               textStyle: const TextStyle(
                                   color: Color(0xffa29aac),
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 40,
               ),
-              GridDashboard()
+              GridHistory()
             ],
           )),
     );

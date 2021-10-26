@@ -1,9 +1,10 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:visionia_app/MainScreens/pagehistory/historyScreen.dart';
 
 class BarWidgets {
-  static AppBar BarOne() {
+  static AppBar BarOne(BuildContext context) {
     return AppBar(
       backgroundColor: const Color(0xff90CAF9),
       elevation: 0,
@@ -15,7 +16,10 @@ class BarWidgets {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const HistoryScreen()));
+          },
           icon: const Icon(Icons.history),
         )
       ],
