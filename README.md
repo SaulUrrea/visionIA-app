@@ -1,7 +1,6 @@
 ## INTERFACES
-SaulUrrea.github.com/visionIA-app/INTERFACES_IMG/Pantalla1.png
 
-
+<img src="INTERFACES_IMG/Pantalla1.png" width="100%">
 
 
 # visionia_app
