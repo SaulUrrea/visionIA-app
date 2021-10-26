@@ -1,6 +1,6 @@
 ## INTERFACES
 
-<img src="INTERFACES_IMG/Pantalla1.png" width="50%">
+<img src="INTERFACES_IMG/Pantalla1.png" width="25%">
 
 
 # visionia_app
