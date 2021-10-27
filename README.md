@@ -1,13 +1,16 @@
-## INTERFACES
+# vision_app
 
-<img src="docs/Pantalla1.png" width="25%"> | <img src="docs/Pantalla2.png" width="25%"> | <img src="docs/Pantalla3.png" width="25%">
+A new Flutter project.
 
-# visionIA-app
+## Getting Started
 
-Proyecto de aplicación móvil con inteligencia artificial
+This project is a starting point for a Flutter application.
 
-# Planteamiento del proyecto.
+A few resources to get you started if this is your first Flutter project:
 
-Este proyecto se basa en el desarrollo de una aplicación multiplataforma, con la cual el usuario tendrá la posibilidad de utilizar múltiples herramientas de última tecnología para identificar gran parte del entorno donde se encuentre.
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-El usuario final tendrá la posibilidad de usar diferentes modelos de inteligencia artificial los cuales podrán brindarle una ayuda a algunas de sus necesidades.
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

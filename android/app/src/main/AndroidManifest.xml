@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.visionia_app">
+    package="com.example.vision_app">
    <application
-        android:label="visionia_app"
+        android:label="vision_app"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
