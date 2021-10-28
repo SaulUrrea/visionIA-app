@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vision_app/ui/widgets/appBar.dart';
 import 'package:vision_app/ui/widgets/theme/images.dart';
 import 'package:vision_app/ui/widgets/theme/style.dart';
 
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
         backgroundColor: backgroudColor,
-        appBar: appBarWidget(),
+        appBar: appBarWidget(context, 'home', 'history', 'home'),
         body: Column(
           children: [
             SizedBox(
@@ -59,84 +60,69 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 40,
             ),
-            cardItemsWidget(
-                assetIconDog, assetBannerDog, 'Detector de mascotas'),
+            cardItemsWidget(assetIconDog, assetBannerDog,
+                'Detector de mascotas', 'mascotas'),
             SizedBox(
               height: 10,
             ),
-            cardItemsWidget(
-                assetIconFlowers, assetBannerFlowers, 'Detector de plantas'),
+            cardItemsWidget(assetIconFlowers, assetBannerFlowers,
+                'Detector de plantas', 'plantas'),
             cardItemsWidget(assetIconFlowers, assetBannerAugmentedReality,
-                'Realidad aumentada'),
+                'Realidad aumentada', 'vr'),
           ],
         ));
   }
 
-  Widget cardItemsWidget(
-      String assetIconDog, String assetBannerDog, String titulo) {
+  Widget cardItemsWidget(String assetIconDog, String assetBannerDog,
+      String titulo, String pagina) {
     final Color backgroudCardColor = Color(0xff453658);
 
     return Container(
       width: MediaQuery.of(context).size.height * 0.45,
       height: MediaQuery.of(context).size.height * 0.2,
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        color: backgroudCardColor,
-        child: Container(
-          height: 200,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                  alignment: Alignment.topCenter,
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.2), BlendMode.dstATop),
-                  image: AssetImage(assetBannerDog),
-                  fit: BoxFit.cover)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                assetIconDog,
-                width: 42,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(titulo, style: textStyleOpenSans),
-              SizedBox(
-                height: 8,
-              ),
-              Text('Inteligencia artificial', style: textStyleOpenSansBold),
-              SizedBox(
-                height: 8,
-              ),
-              Text('Nuevo', style: textStyleOpenSansBoldWhite)
-            ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
           ),
-        ),
-      ),
-    );
-  }
-
-  AppBar appBarWidget() {
-    return AppBar(
-      backgroundColor: Colors.blue.shade300,
-      leading: IconButton(
-        icon: Icon(Icons.menu),
-        onPressed: () {},
-      ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.history),
-          onPressed: () {
-            Navigator.pushNamed(context, 'history');
-          },
-        ),
-      ],
-      centerTitle: true,
-      title: Text('V I S I O N  I A'),
+          color: backgroudCardColor,
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, pagina);
+              print(pagina);
+            },
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  image: DecorationImage(
+                      alignment: Alignment.topCenter,
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                      image: AssetImage(assetBannerDog),
+                      fit: BoxFit.cover)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    assetIconDog,
+                    width: 42,
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(titulo, style: textStyleOpenSans),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text('Inteligencia artificial', style: textStyleOpenSansBold),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text('Nuevo', style: textStyleOpenSansBoldWhite)
+                ],
+              ),
+            ),
+          )),
     );
   }
 }

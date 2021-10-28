@@ -9,6 +9,14 @@ final Color textPrimaryColor = Color.fromRGBO(33, 33, 33, 1);
 final Color dividerColor = Color.fromRGBO(189, 189, 189, 1);
 final Color textIconColorGray = Colors.grey;
 final Color blueColor = Colors.blue;
+
+final Color kblue = Color(0xFF4756DF);
+final Color kwhite = Color(0xFFFFFFFF);
+final Color kblack = Color(0xFF000000);
+final Color kbrown300 = Color(0xFF8D6E63);
+final Color kbrown = Color(0xFF795548);
+final Color kgrey = Color(0xFFC0C0C0);
+
 final TextStyle titleStyleRose =
     TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.red[50]);
 final TextStyle titleStyleWhite =
