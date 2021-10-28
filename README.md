@@ -1,6 +1,6 @@
 ## INTERFACES
 
-<img src="docs/Pantalla1.png" width="25%"> | <img src="docs/Pantalla2.png" width="25%"> | <img src="docs/Pantalla3.png" width="25%">
+<img src="Docs/Pagina1.png" width="25%"> | <img src="Docs/Pagina2.png" width="25%"> | <img src="Docs/Pagina3.png" width="25%">
 
 # visionIA-app
 
