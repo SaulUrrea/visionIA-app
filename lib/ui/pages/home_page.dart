@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vision_app/ui/widgets/appBar.dart';
 import 'package:vision_app/ui/widgets/theme/images.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:vision_app/ui/widgets/theme/style.dart';
 
 class HomePage extends StatefulWidget {
@@ -95,7 +96,8 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               (useCamera)
                   ? _showPicker(context)
-                  : Navigator.pushNamed(context, '/augmentedReality');
+                  : Navigator.pushNamed(context,
+                      '/augmentedReality'); //TODO: implementar la camara de ARCore
             },
             child: Container(
               height: 200,
@@ -173,7 +175,6 @@ class _HomePageState extends State<HomePage> {
         image = selectImage;
       });
       //TODO: Guardar imagen en la base de datos
-      //await BlocProvider.of<UserCubit>(context).uploadImage(image: File(selectImage.path));
     }
   }
 
@@ -186,6 +187,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         this.image = selectImage;
       });
+      //TODO: Guardar imagen en la base de datos
     }
   }
 }
