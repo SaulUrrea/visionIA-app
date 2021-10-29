@@ -5,6 +5,7 @@ AppBar appBarWidget(
   switch (tipo) {
     case 'home':
       return AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.blue.shade300,
         actions: [
           IconButton(

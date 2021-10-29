@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vision_app/ui/widgets/onboard.dart';
+import 'package:vision_app/domain/entities/onboard.dart';
 import 'package:vision_app/ui/widgets/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,32 +11,6 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int currentIndex = 0;
   late PageController _pageController;
-  List<OnboardModel> screens = <OnboardModel>[
-    OnboardModel(
-      img: 'assets/img-4.png',
-      text: "Sistema de detección de animales.",
-      desc:
-          "Este es un sistema de inteligencia artificial elaborado con la herramienta TensorFlow que nos sirve para el entrenamiento de una AI mediante un banco imágenes.",
-      bg: Colors.white,
-      button: Color(0xFF4756DF),
-    ),
-    OnboardModel(
-      img: 'assets/img-5.png',
-      text: "Sistema de detección de plantas",
-      desc:
-          "Este es un sistema de inteligencia artificial elaborado con la herramienta TensorFlow que nos sirve para el entrenamiento de una AI mediante un banco imágenes.",
-      bg: Color(0xFF4756DF),
-      button: Colors.white,
-    ),
-    OnboardModel(
-      img: 'assets/img-3.png',
-      text: "Sistema de generación de objetos 3D",
-      desc:
-          "Sistema que se genera con la tecnología Arcore que nos ayuda a poder generar objetos en 3 dimensiones en un plano con la ayuda de la cámara.",
-      bg: Colors.white,
-      button: Color(0xFF4756DF),
-    ),
-  ];
 
   @override
   void initState() {
@@ -50,40 +24,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     super.dispose();
   }
 
-  _storeOnboardInfo() async {
-    print("Shared pref called");
-    int isViewed = 0;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('onBoard', isViewed);
-    print(prefs.getInt('onBoard'));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
-      appBar: AppBar(
-        backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
-        elevation: 0.0,
-        actions: [
-          TextButton(
-            onPressed: () {
-              _storeOnboardInfo();
-              Navigator.pushNamed(context, 'home');
-            },
-            child: Text(
-              "Skip",
-              style: TextStyle(
-                color: currentIndex % 2 == 0 ? kblack : kwhite,
-              ),
-            ),
-          )
-        ],
-      ),
+      appBar: _appBarWidget(context),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: PageView.builder(
-            itemCount: screens.length,
+            itemCount: ListScreens.length,
             controller: _pageController,
             physics: NeverScrollableScrollPhysics(),
             onPageChanged: (int index) {
@@ -97,11 +46,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(screens[index].img),
+                  Image.asset(ListScreens[index].img),
                   Container(
                     height: 10.0,
                     child: ListView.builder(
-                      itemCount: screens.length,
+                      itemCount: ListScreens.length,
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
@@ -124,7 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                   ),
                   Text(
-                    screens[index].text,
+                    ListScreens[index].text,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 27.0,
@@ -134,7 +83,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                   ),
                   Text(
-                    screens[index].desc,
+                    ListScreens[index].desc,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14.0,
@@ -145,7 +94,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   InkWell(
                     onTap: () async {
                       print(index);
-                      if (index == screens.length - 1) {
+                      if (index == ListScreens.length - 1) {
                         await _storeOnboardInfo();
                         Navigator.pushNamed(context, 'home');
                       }
@@ -163,7 +112,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           borderRadius: BorderRadius.circular(15.0)),
                       child: Row(mainAxisSize: MainAxisSize.min, children: [
                         Text(
-                          "Next",
+                          'Siguiente',
                           style: TextStyle(
                               fontSize: 16.0,
                               color: index % 2 == 0 ? kwhite : kblue),
@@ -183,5 +132,35 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             }),
       ),
     );
+  }
+
+  AppBar _appBarWidget(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
+      elevation: 0.0,
+      actions: [
+        TextButton(
+          onPressed: () {
+            _storeOnboardInfo();
+            Navigator.pushNamed(context, 'home');
+          },
+          child: Text(
+            'Saltar',
+            style: TextStyle(
+              color: currentIndex % 2 == 0 ? kblack : kwhite,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  _storeOnboardInfo() async {
+    print("Shared pref called");
+    int isViewed = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('onBoard', isViewed);
+    print(prefs.getInt('onBoard'));
   }
 }
