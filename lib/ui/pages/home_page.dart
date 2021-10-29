@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vision_app/ui/widgets/appBar.dart';
 import 'package:vision_app/ui/widgets/theme/images.dart';
 import 'package:vision_app/ui/widgets/theme/style.dart';
@@ -12,6 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ImagePicker _picker = ImagePicker();
+  XFile? image;
+
   @override
   Widget build(BuildContext context) {
     final Color backgroudColor = Color(0xff392850);
@@ -60,21 +64,23 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 40,
             ),
-            cardItemsWidget(assetIconDog, assetBannerDog,
-                'Detector de mascotas', 'mascotas'),
+            cardItemsWidget(
+                assetIconDog, assetBannerDog, 'Detector de mascotas'),
             SizedBox(
               height: 10,
             ),
-            cardItemsWidget(assetIconFlowers, assetBannerFlowers,
-                'Detector de plantas', 'plantas'),
+            cardItemsWidget(
+                assetIconFlowers, assetBannerFlowers, 'Detector de plantas'),
             cardItemsWidget(assetIconFlowers, assetBannerAugmentedReality,
-                'Realidad aumentada', 'vr'),
+                'Realidad aumentada',
+                useCamera: false),
           ],
         ));
   }
 
-  Widget cardItemsWidget(String assetIconDog, String assetBannerDog,
-      String titulo, String pagina) {
+  Widget cardItemsWidget(
+      String assetIconDog, String assetBannerDog, String titulo,
+      {bool useCamera = true}) {
     final Color backgroudCardColor = Color(0xff453658);
 
     return Container(
@@ -87,8 +93,9 @@ class _HomePageState extends State<HomePage> {
           color: backgroudCardColor,
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, pagina);
-              print(pagina);
+              (useCamera)
+                  ? _showPicker(context)
+                  : Navigator.pushNamed(context, '/augmentedReality');
             },
             child: Container(
               height: 200,
@@ -124,5 +131,61 @@ class _HomePageState extends State<HomePage> {
             ),
           )),
     );
+  }
+
+  void _showPicker(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Galeria'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  _imgFromCamera() async {
+    final XFile? selectImage =
+        await _picker.pickImage(source: ImageSource.camera);
+    if (selectImage != null) {
+      print('Camara');
+      print(selectImage);
+      setState(() {
+        image = selectImage;
+      });
+      //TODO: Guardar imagen en la base de datos
+      //await BlocProvider.of<UserCubit>(context).uploadImage(image: File(selectImage.path));
+    }
+  }
+
+  _imgFromGallery() async {
+    final XFile? selectImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (selectImage != null) {
+      print('Camara');
+      print(selectImage);
+      setState(() {
+        this.image = selectImage;
+      });
+    }
   }
 }
