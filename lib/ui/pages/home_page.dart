@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:vision_app/ui/widgets/appBar.dart';
 import 'package:vision_app/ui/widgets/theme/images.dart';
 import 'package:vision_app/ui/widgets/theme/style.dart';
@@ -13,9 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ImagePicker _picker = ImagePicker();
-  XFile? image;
-
   @override
   Widget build(BuildContext context) {
     final Color backgroudColor = Color(0xff392850);
@@ -72,15 +68,16 @@ class _HomePageState extends State<HomePage> {
             cardItemsWidget(
                 assetIconFlowers, assetBannerFlowers, 'Detector de plantas'),
             cardItemsWidget(assetIconFlowers, assetBannerAugmentedReality,
-                'Realidad aumentada',
-                useCamera: false),
+                'Realidad aumentada'),
           ],
         ));
   }
 
   Widget cardItemsWidget(
-      String assetIconDog, String assetBannerDog, String titulo,
-      {bool useCamera = true}) {
+    String assetIconDog,
+    String assetBannerDog,
+    String titulo,
+  ) {
     final Color backgroudCardColor = Color(0xff453658);
 
     return Container(
@@ -93,10 +90,17 @@ class _HomePageState extends State<HomePage> {
           color: backgroudCardColor,
           child: InkWell(
             onTap: () {
-              (useCamera)
-                  ? _showPicker(context)
-                  : Navigator.pushNamed(context,
-                      '/augmentedReality'); //TODO: implementar la camara de ARCore
+              switch (titulo) {
+                case 'Detector de mascotas':
+                  Navigator.pushNamed(context, 'mascotas');
+                  break;
+                case 'Detector de plantas':
+                  Navigator.pushNamed(context, 'plantas');
+                  break;
+                case 'Realidad aumentada':
+                  Navigator.pushNamed(context, 'vr');
+                  break;
+              }
             },
             child: Container(
               height: 200,
@@ -132,61 +136,5 @@ class _HomePageState extends State<HomePage> {
             ),
           )),
     );
-  }
-
-  void _showPicker(BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Container(
-              child: new Wrap(
-                children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Galeria'),
-                      onTap: () {
-                        _imgFromGallery();
-                        Navigator.of(context).pop();
-                      }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
-                    onTap: () {
-                      _imgFromCamera();
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  _imgFromCamera() async {
-    final XFile? selectImage =
-        await _picker.pickImage(source: ImageSource.camera);
-    if (selectImage != null) {
-      print('Camara');
-      print(selectImage);
-      setState(() {
-        image = selectImage;
-      });
-      //TODO: Guardar imagen en la base de datos
-    }
-  }
-
-  _imgFromGallery() async {
-    final XFile? selectImage =
-        await _picker.pickImage(source: ImageSource.gallery);
-    if (selectImage != null) {
-      print('Camara');
-      print(selectImage);
-      setState(() {
-        this.image = selectImage;
-      });
-      //TODO: Guardar imagen en la base de datos
-    }
   }
 }

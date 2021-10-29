@@ -21,12 +21,12 @@ AppBar appBarWidget(
     case 'page2':
       return AppBar(
         backgroundColor: Colors.blue.shade300,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            Navigator.pushNamed(context, page);
-          },
-        ),
+        centerTitle: true,
+        title: Text('V I S I O N  I A | $title'),
+      );
+    case 'page3':
+      return AppBar(
+        backgroundColor: Colors.deepOrange[300],
         centerTitle: true,
         title: Text('V I S I O N  I A | $title'),
       );

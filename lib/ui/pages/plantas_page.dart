@@ -12,7 +12,7 @@ class _PlantasPageState extends State<PlantasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWidget(context, 'Mascotas', 'home', 'page2'),
+      appBar: appBarWidget(context, 'Plantas', 'home', 'page2'),
       body: Center(
         child: Text('Plantas'),
       ),

@@ -5,3 +5,4 @@ final String assetBannerDog = 'assets/opcion1.png';
 final String assetIconFlowers = 'assets/planta.png';
 final String assetBannerFlowers = 'assets/opcion2.png';
 final String assetBannerAugmentedReality = 'assets/opcion3.png';
+final String assetInfoDog = 'assets/catsDogs.png';
