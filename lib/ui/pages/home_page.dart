@@ -67,8 +67,11 @@ class _HomePageState extends State<HomePage> {
             ),
             cardItemsWidget(
                 assetIconFlowers, assetBannerFlowers, 'Detector de plantas'),
+            SizedBox(
+              height: 10,
+            ),
             cardItemsWidget(assetIconFlowers, assetBannerAugmentedReality,
-                'Realidad aumentada'),
+                'Reconocedor de dígitos'),
           ],
         ));
   }
@@ -97,8 +100,8 @@ class _HomePageState extends State<HomePage> {
                 case 'Detector de plantas':
                   Navigator.pushNamed(context, 'plantas');
                   break;
-                case 'Realidad aumentada':
-                  Navigator.pushNamed(context, 'vr');
+                case 'Reconocedor de dígitos':
+                  Navigator.pushNamed(context, 'Digitos');
                   break;
               }
             },
