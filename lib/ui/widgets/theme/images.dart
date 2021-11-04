@@ -6,3 +6,4 @@ final String assetIconFlowers = 'assets/planta.png';
 final String assetBannerFlowers = 'assets/opcion2.png';
 final String assetBannerAugmentedReality = 'assets/opcion3.png';
 final String assetInfoDog = 'assets/catsDogs.png';
+final String assetInfoPlant = 'assets/plant.png';

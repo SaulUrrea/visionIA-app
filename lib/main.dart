@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.sl<TfmodelCubit>(),
         ),
+        BlocProvider(
+          create: (_) => di.sl<TfmodelCubitPlants>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Vision App',

@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:tflite/tflite.dart';
 
-class RunModelMascotUseCase {
-  Future<String> runMascotModel(File image) async {
+class RunModelPlantUseCase {
+  Future<String> runPlantModel(File image) async {
     try {
       String? res = await Tflite.loadModel(
-        model: 'assets/models/animals/model_unquant.tflite',
-        labels: 'assets/models/animals/labels.txt',
+        model: 'assets/models/plants/model_unquant.tflite',
+        labels: 'assets/models/plants/labels.txt',
         numThreads: 1,
         isAsset: true,
         useGpuDelegate: false,

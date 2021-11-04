@@ -30,6 +30,12 @@ AppBar appBarWidget(
         centerTitle: true,
         title: Text('V I S I O N  I A | $title'),
       );
+    case 'page4':
+      return AppBar(
+        backgroundColor: Colors.green[300],
+        centerTitle: true,
+        title: Text('V I S I O N  I A | $title'),
+      );
     default:
       return AppBar();
   }
