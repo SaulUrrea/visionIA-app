@@ -7,14 +7,10 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   //! Features
-  sl.registerFactory<TfmodelCubit>(
-      () => TfmodelCubit(runModelMascotUseCase: sl.call()));
-
-  sl.registerFactory<TfmodelCubitPlants>(
-      () => TfmodelCubitPlants(runModelPlantUseCase: sl.call()));
+  sl.registerFactory<TfmodelCubit>(() => TfmodelCubit(
+      runModelMascotUseCase: sl.call(), runModelPlantUseCase: sl.call()));
 
   //Use Case
   sl.registerLazySingleton(() => RunModelMascotUseCase());
-
   sl.registerLazySingleton(() => RunModelPlantUseCase());
 }

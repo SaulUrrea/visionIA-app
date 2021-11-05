@@ -20,10 +20,11 @@ class RunModelMascotUseCase {
       path: image.path,
       imageMean: 0.0,
       imageStd: 255.0,
-      numResults: 2,
+      numResults: 4,
       threshold: 0.2,
       asynch: true,
     );
+    print(recognitions);
     String label =
         recognitions?[0]['label'].toString().substring(2) ?? 'No se reconoció';
     print('Se reconoció: $label');

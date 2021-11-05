@@ -1,2 +1,5 @@
-0 perro
-1 gato
+0 Perro
+1 Gato
+2 Pez
+3 Hámster
+4 Pajaro

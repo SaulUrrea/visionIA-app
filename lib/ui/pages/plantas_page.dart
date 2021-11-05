@@ -21,7 +21,7 @@ class _PlantasPageState extends State<PlantasPage> {
 
   @override
   void initState() {
-    BlocProvider.of<TfmodelCubitPlants>(context).emit(TfmodelInitial());
+    BlocProvider.of<TfmodelCubit>(context).emit(TfmodelInitial());
     super.initState();
   }
 
@@ -32,8 +32,8 @@ class _PlantasPageState extends State<PlantasPage> {
       body: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.only(bottom: 100, top: 100),
-        child: BlocBuilder<TfmodelCubitPlants, TfmodelState>(
-            builder: (context, state) {
+        child:
+            BlocBuilder<TfmodelCubit, TfmodelState>(builder: (context, state) {
           if (state is TfmodelLoading) {
             return CircularProgressIndicator();
           }
@@ -56,7 +56,7 @@ class _PlantasPageState extends State<PlantasPage> {
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Colors.deepOrange[300])),
+                          MaterialStateProperty.all(Colors.green[300])),
                   onPressed: () {
                     _showPicker(context);
                   },
@@ -83,7 +83,7 @@ class _PlantasPageState extends State<PlantasPage> {
               ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.deepOrange[300])),
+                        MaterialStateProperty.all(Colors.green[300])),
                 onPressed: () {
                   _showPicker(context);
                 },
@@ -152,7 +152,7 @@ class _PlantasPageState extends State<PlantasPage> {
       setState(() {
         image = selectImage;
       });
-      await BlocProvider.of<TfmodelCubitPlants>(context)
+      await BlocProvider.of<TfmodelCubit>(context)
           .runPlantModel(File(selectImage.path));
 
       //TODO: Guardar imagen en la base de datos
@@ -166,7 +166,7 @@ class _PlantasPageState extends State<PlantasPage> {
       setState(() {
         this.image = selectImage;
       });
-      await BlocProvider.of<TfmodelCubitPlants>(context)
+      await BlocProvider.of<TfmodelCubit>(context)
           .runPlantModel(File(selectImage.path));
 
       //TODO: Guardar imagen en la base de datos

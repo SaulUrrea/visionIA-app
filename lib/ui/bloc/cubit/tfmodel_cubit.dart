@@ -9,8 +9,11 @@ part 'tfmodel_state.dart';
 
 class TfmodelCubit extends Cubit<TfmodelState> {
   final RunModelMascotUseCase runModelMascotUseCase;
+  final RunModelPlantUseCase runModelPlantUseCase;
 
-  TfmodelCubit({required this.runModelMascotUseCase}) : super(TfmodelInitial());
+  TfmodelCubit(
+      {required this.runModelMascotUseCase, required this.runModelPlantUseCase})
+      : super(TfmodelInitial());
 
   Future<void> runMascotModel(File imagePath) async {
     emit(TfmodelInitial());
@@ -22,13 +25,6 @@ class TfmodelCubit extends Cubit<TfmodelState> {
       emit(TfmodelError(e.toString()));
     }
   }
-}
-
-class TfmodelCubitPlants extends Cubit<TfmodelState> {
-  final RunModelPlantUseCase runModelPlantUseCase;
-
-  TfmodelCubitPlants({required this.runModelPlantUseCase})
-      : super(TfmodelInitial());
 
   Future<void> runPlantModel(File imagePath) async {
     emit(TfmodelInitial());
