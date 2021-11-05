@@ -33,6 +33,11 @@ dependencies:
   get_it: ^7.2.0
   equatable: ^2.0.3
   
+  #ChatBot
+  sound_stream: ^0.3.0
+  dialogflow_grpc: ^0.2.9
+  rxdart: ^0.27.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -56,6 +61,7 @@ flutter:
     - assets/models/animals/.
     - assets/models/plants/.
     - assets/models/numeros/.
+    - assets/models/chatbot/credentials.json
 
   #   - images/a_dot_ham.jpeg
 

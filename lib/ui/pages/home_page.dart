@@ -52,7 +52,9 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     alignment: Alignment.topCenter,
                     icon: Image.asset(assetIconNotification),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'chat');
+                    },
                   )
                 ],
               ),
