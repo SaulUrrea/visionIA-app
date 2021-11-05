@@ -113,7 +113,7 @@ class _ChatState extends State<Chat> {
       });
 
       //Error que genera la no devolucion del mensaje del bot.
-      DetectIntentResponse data = await dialogflow.detectIntent(text, 'en-US');
+      DetectIntentResponse data = await dialogflow.detectIntent(text, 'es-ES');
       //--------
 
       String fulfillmentText = data.queryResult.fulfillmentText;
@@ -155,7 +155,7 @@ class _ChatState extends State<Chat> {
       // See: https://cloud.google.com/dialogflow/es/docs/reference/rpc/google.cloud.dialogflow.v2#google.cloud.dialogflow.v2.InputAudioConfig
       var config = InputConfigV2beta1(
           encoding: 'AUDIO_ENCODING_LINEAR_16',
-          languageCode: 'en-US',
+          languageCode: 'es-ES',
           sampleRateHertz: 16000,
           singleUtterance: false,
           speechContexts: [biasList]);

@@ -44,6 +44,7 @@ dev_dependencies:
 
   google_fonts: ^2.1.0
   shared_preferences: ^2.0.8
+  flutter_lints: ^1.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
