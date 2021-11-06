@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:vision_app/ui/bloc/cubit/tfmodel_cubit.dart';
+import 'package:vision_app/ui/utils/vars.dart';
 import 'package:vision_app/ui/widgets/appBar.dart';
 import 'package:vision_app/ui/widgets/theme/images.dart';
 import 'package:vision_app/ui/widgets/theme/style.dart';
@@ -119,18 +120,18 @@ class _PlantasPageState extends State<PlantasPage> {
         builder: (BuildContext bc) {
           return SafeArea(
             child: Container(
-              child: new Wrap(
+              child: Wrap(
                 children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Galeria'),
+                  ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Galeria'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camara'),
+                  ListTile(
+                    leading: Icon(Icons.photo_camera),
+                    title: Text('Camara'),
                     onTap: () {
                       _imgFromCamera();
                       Navigator.of(context).pop();
@@ -152,8 +153,8 @@ class _PlantasPageState extends State<PlantasPage> {
       setState(() {
         image = selectImage;
       });
-      await BlocProvider.of<TfmodelCubit>(context)
-          .runPlantModel(File(selectImage.path));
+      await BlocProvider.of<TfmodelCubit>(context).runTensorFlowModel(
+          File(selectImage.path), assetPlantsModel, assetPlantsLabels);
 
       //TODO: Guardar imagen en la base de datos
     }
@@ -166,8 +167,8 @@ class _PlantasPageState extends State<PlantasPage> {
       setState(() {
         this.image = selectImage;
       });
-      await BlocProvider.of<TfmodelCubit>(context)
-          .runPlantModel(File(selectImage.path));
+      await BlocProvider.of<TfmodelCubit>(context).runTensorFlowModel(
+          File(selectImage.path), assetPlantsModel, assetPlantsLabels);
 
       //TODO: Guardar imagen en la base de datos
     }

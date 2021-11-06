@@ -1,29 +1,34 @@
 import 'dart:io';
 
 import 'package:tflite/tflite.dart';
+import 'package:vision_app/domain/repository/tflite_repository.dart';
 
-class RunModelPlantUseCase {
-  Future<String> runPlantModel(File image) async {
+class TensorFlowRepositoryImpl implements TFliteRepository {
+  @override
+  Future<String> runTensorFlowModel(
+      {required File image,
+      required String assetModel,
+      required String assetLabels}) async {
     try {
-      String? res = await Tflite.loadModel(
-        model: 'assets/models/plants/model_unquant.tflite',
-        labels: 'assets/models/plants/labels.txt',
+      await Tflite.loadModel(
+        model: assetModel,
+        labels: assetLabels,
         numThreads: 1,
         isAsset: true,
         useGpuDelegate: false,
       );
-      print('Se inicializo el modelo, $res');
     } catch (e) {
-      print('Error al inicializar el modelo: $e');
+      throw UnimplementedError();
     }
     var recognitions = await Tflite.runModelOnImage(
       path: image.path,
       imageMean: 0.0,
       imageStd: 255.0,
-      numResults: 2,
+      numResults: 4,
       threshold: 0.2,
       asynch: true,
     );
+
     String label =
         recognitions?[0]['label'].toString().substring(2) ?? 'No se reconoció';
     print('Se reconoció: $label');

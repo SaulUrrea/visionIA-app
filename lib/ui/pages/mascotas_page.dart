@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vision_app/ui/bloc/cubit/tfmodel_cubit.dart';
+import 'package:vision_app/ui/utils/vars.dart';
 import 'package:vision_app/ui/widgets/appBar.dart';
 import 'package:vision_app/ui/widgets/theme/images.dart';
 import 'package:vision_app/ui/widgets/theme/style.dart';
@@ -118,18 +119,18 @@ class _MascotasPageState extends State<MascotasPage> {
         builder: (BuildContext bc) {
           return SafeArea(
             child: Container(
-              child: new Wrap(
+              child: Wrap(
                 children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Galeria'),
+                  ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Galeria'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camara'),
+                  ListTile(
+                    leading: Icon(Icons.photo_camera),
+                    title: Text('Camara'),
                     onTap: () {
                       _imgFromCamera();
                       Navigator.of(context).pop();
@@ -151,8 +152,9 @@ class _MascotasPageState extends State<MascotasPage> {
       setState(() {
         image = selectImage;
       });
-      await BlocProvider.of<TfmodelCubit>(context)
-          .runMascotModel(File(selectImage.path));
+
+      await BlocProvider.of<TfmodelCubit>(context).runTensorFlowModel(
+          File(selectImage.path), assetAnimalsModel, assetAnimalsLabels);
 
       //TODO: Guardar imagen en la base de datos
     }
@@ -165,8 +167,8 @@ class _MascotasPageState extends State<MascotasPage> {
       setState(() {
         this.image = selectImage;
       });
-      await BlocProvider.of<TfmodelCubit>(context)
-          .runMascotModel(File(selectImage.path));
+      await BlocProvider.of<TfmodelCubit>(context).runTensorFlowModel(
+          File(selectImage.path), assetAnimalsModel, assetAnimalsLabels);
 
       //TODO: Guardar imagen en la base de datos
     }

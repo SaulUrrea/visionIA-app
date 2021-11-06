@@ -2,35 +2,22 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:vision_app/domain/use_cases/model_mascot_use_case.dart';
-import 'package:vision_app/domain/use_cases/model_plant_use_case.dart';
+import 'package:vision_app/domain/use_cases/load_model_use_case.dart';
 
 part 'tfmodel_state.dart';
 
 class TfmodelCubit extends Cubit<TfmodelState> {
-  final RunModelMascotUseCase runModelMascotUseCase;
-  final RunModelPlantUseCase runModelPlantUseCase;
+  final RunModelAIUseCase runModelAIUseCas;
 
-  TfmodelCubit(
-      {required this.runModelMascotUseCase, required this.runModelPlantUseCase})
-      : super(TfmodelInitial());
+  TfmodelCubit({required this.runModelAIUseCas}) : super(TfmodelInitial());
 
-  Future<void> runMascotModel(File imagePath) async {
+  Future<void> runTensorFlowModel(
+      File imagePath, String assetModel, String assetLabels) async {
     emit(TfmodelInitial());
     try {
       emit(TfmodelLoading());
-      final result = await runModelMascotUseCase.runMascotModel(imagePath);
-      emit(TfmodelLoaded(result));
-    } catch (e) {
-      emit(TfmodelError(e.toString()));
-    }
-  }
-
-  Future<void> runPlantModel(File imagePath) async {
-    emit(TfmodelInitial());
-    try {
-      emit(TfmodelLoading());
-      final result = await runModelPlantUseCase.runPlantModel(imagePath);
+      final result = await runModelAIUseCas.call(
+          image: imagePath, assetModel: assetModel, assetLabels: assetLabels);
       emit(TfmodelLoaded(result));
     } catch (e) {
       emit(TfmodelError(e.toString()));

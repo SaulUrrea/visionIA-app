@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         appBar: appBarWidget(context, 'home', 'history', 'home'),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Padding(
