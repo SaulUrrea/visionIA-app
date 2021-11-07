@@ -8,6 +8,7 @@ import 'package:vision_app/ui/pages/history_page.dart';
 import 'package:vision_app/ui/pages/home_page.dart';
 import 'package:vision_app/ui/pages/mascotas_page.dart';
 import 'package:vision_app/ui/pages/plantas_page.dart';
+import 'package:vision_app/ui/screens/draw_screen.dart';
 import 'package:vision_app/ui/screens/onboarding_screen.dart';
 import 'package:vision_app/ui/screens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           'history': (context) => HistoryPage(),
           'mascotas': (context) => MascotasPage(),
           'plantas': (context) => PlantasPage(),
+          'digitos': (context) => DrawScreen(),
           'chat': (context) => Chat(),
         },
       ),

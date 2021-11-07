@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.pushNamed(context, 'plantas');
                   break;
                 case 'Reconocedor de dígitos':
-                  Navigator.pushNamed(context, 'Digitos');
+                  Navigator.pushNamed(context, 'digitos');
                   break;
               }
             },
