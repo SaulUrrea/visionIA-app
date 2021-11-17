@@ -17,6 +17,8 @@ final Color kbrown300 = Color(0xFF8D6E63);
 final Color kbrown = Color(0xFF795548);
 final Color kgrey = Color(0xFFC0C0C0);
 
+final TextStyle titleStyleBlack =
+    TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black);
 final TextStyle titleStyleRose =
     TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.red[50]);
 final TextStyle titleStyleWhite =

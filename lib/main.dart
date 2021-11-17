@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vision_app/ui/bloc/cubit/tfmodel_cubit.dart';
 import 'package:vision_app/ui/pages/chat_page.dart';
-import 'package:vision_app/ui/pages/history_page.dart';
 import 'package:vision_app/ui/pages/home_page.dart';
 import 'package:vision_app/ui/pages/mascotas_page.dart';
 import 'package:vision_app/ui/pages/plantas_page.dart';
@@ -46,7 +45,6 @@ class MyApp extends StatelessWidget {
           '/': (context) => SplashScreen(),
           'home': (context) => HomePage(),
           'onboarding': (context) => OnBoardingScreen(),
-          'history': (context) => HistoryPage(),
           'mascotas': (context) => MascotasPage(),
           'plantas': (context) => PlantasPage(),
           'digitos': (context) => DrawScreen(),

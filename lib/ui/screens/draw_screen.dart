@@ -1,13 +1,12 @@
 import 'dart:typed_data';
 
-import 'package:dialogflow_grpc/generated/google/protobuf/struct.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:vision_app/Models/prediction.dart';
 import 'package:vision_app/Models/recognizer.dart';
 import 'package:vision_app/ui/widgets/appBar.dart';
 import 'package:vision_app/ui/widgets/drawing_painter.dart';
-import 'package:vision_app/ui/widgets/prediction_widget.dart';
 import 'package:vision_app/ui/widgets/theme/constants.dart';
+import 'package:vision_app/ui/widgets/theme/style.dart';
 
 class DrawScreen extends StatefulWidget {
   const DrawScreen({Key? key}) : super(key: key);
@@ -17,17 +16,14 @@ class DrawScreen extends StatefulWidget {
 }
 
 class _DrawScreenState extends State<DrawScreen> {
-  //final _points = List<Offset>();
   final List<Offset?> _points = [];
 
   final _recognizer = Recognizer();
   List<Prediction> _prediction = [];
-  //late  _prediction;
   bool initialize = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _initModel();
   }
@@ -36,45 +32,30 @@ class _DrawScreenState extends State<DrawScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarWidget(context, 'Digit', 'home', 'page5'),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'MNIST database of handwritten digits',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                        'The digits have been size-normalized and centerd in fixed-size  images (28x28)')
-                  ],
-                ),
-              )),
-              _drawCanvasWidget()
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          _mnistPreviewImage(),
-          const SizedBox(
-            height: 10,
-          ),
-          PredictionWidget(
-            predictions: _prediction,
-          )
-        ],
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Dibuje su numero', style: titleStyleBlack),
+            const SizedBox(
+              height: 20,
+            ),
+            _mnistPreviewImage(),
+            const SizedBox(
+              height: 10,
+            ),
+            _predictionText(),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
         child: Icon(Icons.clear),
         onPressed: () {
           setState(() {
             _points.clear();
-            _prediction.clear();
+            _prediction = [];
           });
         },
       ),
@@ -100,7 +81,6 @@ class _DrawScreenState extends State<DrawScreen> {
           }
         },
         onPanEnd: (DragEndDetails details) {
-          _points.add(null);
           _recognize();
         },
         child: CustomPaint(
@@ -110,32 +90,8 @@ class _DrawScreenState extends State<DrawScreen> {
     );
   }
 
-  Widget _drawCanvasWidget() {
-    return Container(
-      width: 100,
-      height: 100,
-      color: Colors.black,
-      child: FutureBuilder(
-        future: _previewImage(),
-        builder: (BuildContext _, AsyncSnapshot<Uint8List> snapshot) {
-          if (snapshot.hasData) {
-            return Image.memory(
-              snapshot.data!,
-              fit: BoxFit.fill,
-            );
-          } else {
-            return Center(
-              child: Text('Error'),
-            );
-          }
-        },
-      ),
-    );
-  }
-
   void _initModel() async {
     var res = await _recognizer.loadModel();
-    print(res);
   }
 
   Future<Uint8List> _previewImage() async {
@@ -144,9 +100,22 @@ class _DrawScreenState extends State<DrawScreen> {
 
   void _recognize() async {
     List<dynamic> pred = await _recognizer.recognize(_points);
-    print(pred);
     setState(() {
       _prediction = pred.map((json) => Prediction.fromJson(json)).toList();
     });
+  }
+
+  Widget _predictionText() {
+    if (_prediction.isNotEmpty && _prediction[0].label != null) {
+      var porcentaje = _prediction.first.confidence * 100;
+      return Text(
+        'Seguro en un: ${porcentaje.toStringAsFixed(2)}% de que es un: ${_prediction.first.label}',
+        style: TextStyle(
+          fontSize: 20,
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }

@@ -7,14 +7,6 @@ AppBar appBarWidget(
       return AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.blue.shade300,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.history),
-            onPressed: () {
-              Navigator.pushNamed(context, page);
-            },
-          ),
-        ],
         centerTitle: true,
         title: Text('V I S I O N  I A'),
       );

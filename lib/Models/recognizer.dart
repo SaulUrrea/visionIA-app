@@ -76,7 +76,6 @@ class Recognizer {
         _bgPaint);
 
     for (var i = 0; i < points.length - 1; i++) {
-      print('looook | ${points.length} | $i');
       //error
       if (points[i] != null && points[i + 1] != null) {
         canvas.drawLine(points[i]!, points[i + 1]!, _whitePaint);
